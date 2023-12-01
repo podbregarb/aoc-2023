@@ -103,10 +103,10 @@ function solveSecondPart(input) {
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const testInput = yield readFileAtPath(testInputFilePath);
-        console.log(`Test input solution first part: ${solveFirstPart(testInput)}`);
         const testInput2 = yield readFileAtPath(testInput2FilePath);
-        console.log(`Test input solution second part: ${solveSecondPart(testInput2)}`);
         const input = yield readFileAtPath(inputFilePath);
+        console.log(`Test input solution first part: ${solveFirstPart(testInput)}`);
+        console.log(`Test input solution second part: ${solveSecondPart(testInput2)}`);
         console.log(`Input solution first part: ${solveFirstPart(input)}`);
         console.log(`Input solution second part: ${solveSecondPart(input)}`);
     });
