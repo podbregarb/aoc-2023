@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import {FileUtils} from "../utils/file-utils";
 
 const testInputFilePath = 'testInput.txt';
 const testInput2FilePath = 'testInput2.txt';
@@ -18,18 +19,16 @@ const numberMapping: any = {
 
 main();
 
-function readFileAtPath(filePath: string): Promise<string[]> {
-    return new Promise((resolve, reject) => {
-        fs.readFile(filePath, 'utf8', (err, data) => {
-            if (err) {
-                reject(err);
-                return;
-            }
+async function main() {
+    const testInput = await FileUtils.readFileAtPath(testInputFilePath);
+    const testInput2 = await FileUtils.readFileAtPath(testInput2FilePath);
+    const input = await FileUtils.readFileAtPath(inputFilePath);
 
-            const rows = data.split('\n').map(line => line.trim());
-            resolve(rows);
-        });
-    });
+    console.log(`Test input solution first part: ${solveFirstPart(testInput)}`)
+    console.log(`Test input solution second part: ${solveSecondPart(testInput2)}`)
+
+    console.log(`Input solution first part: ${solveFirstPart(input)}`)
+    console.log(`Input solution second part: ${solveSecondPart(input)}`)
 }
 
 function findFirstNumber(chars: string): string {
@@ -74,17 +73,5 @@ function solveSecondPart(input: string[]): number {
         sum += Number(strNumber)
     }
     return sum;
-}
-
-async function main() {
-    const testInput = await readFileAtPath(testInputFilePath);
-    const testInput2 = await readFileAtPath(testInput2FilePath);
-    const input = await readFileAtPath(inputFilePath);
-
-    console.log(`Test input solution first part: ${solveFirstPart(testInput)}`)
-    console.log(`Test input solution second part: ${solveSecondPart(testInput2)}`)
-
-    console.log(`Input solution first part: ${solveFirstPart(input)}`)
-    console.log(`Input solution second part: ${solveSecondPart(input)}`)
 }
 
