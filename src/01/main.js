@@ -36,6 +36,14 @@ function main() {
         console.log(`Input solution second part: ${solveSecondPart(input)}`);
     });
 }
+function solveFirstPart(input) {
+    let sum = 0;
+    for (let row of input) {
+        const strNumber = findFirstNumber(row) + findFirstNumber(row.split('').reverse().join(''));
+        sum += Number(strNumber);
+    }
+    return sum;
+}
 function findFirstNumber(chars) {
     const match = chars.match(/\d/);
     if (match) {
@@ -45,10 +53,11 @@ function findFirstNumber(chars) {
         return '';
     }
 }
-function solveFirstPart(input) {
+function solveSecondPart(input) {
     let sum = 0;
     for (let row of input) {
-        const strNumber = findFirstNumber(row) + findFirstNumber(row.split('').reverse().join(''));
+        const strNumber = findFirstNumberOrDescriptiveNumber(row, false) +
+            findFirstNumberOrDescriptiveNumber(row.split('').reverse().join(''), true);
         sum += Number(strNumber);
     }
     return sum;
@@ -66,13 +75,4 @@ function findFirstNumberOrDescriptiveNumber(chars, reverse) {
         }
     }
     return '';
-}
-function solveSecondPart(input) {
-    let sum = 0;
-    for (let row of input) {
-        const strNumber = findFirstNumberOrDescriptiveNumber(row, false) +
-            findFirstNumberOrDescriptiveNumber(row.split('').reverse().join(''), true);
-        sum += Number(strNumber);
-    }
-    return sum;
 }

@@ -11,7 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const file_utils_1 = require("../utils/file-utils");
 const testInputFilePath = 'testInput.txt';
-const testInput2FilePath = 'testInput2.txt';
 const inputFilePath = 'input.txt';
 const maxNumberOfCubes = {
     "red": 12,
@@ -61,7 +60,7 @@ function solveSecondPart(input) {
         // "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"
         // " 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"
         const sets = inp.split(':')[1].split(';');
-        let cubess = {
+        let minCubes = {
             red: 0,
             green: 0,
             blue: 0
@@ -73,12 +72,12 @@ function solveSecondPart(input) {
                 const numberAndColor = cubes.trim().split(' ');
                 const number = Number(numberAndColor[0]);
                 const color = numberAndColor[1];
-                if (number > cubess[color]) {
-                    cubess[color] = number;
+                if (number > minCubes[color]) {
+                    minCubes[color] = number;
                 }
             }
         }
-        sum += (cubess.red * cubess.green * cubess.blue);
+        sum += (minCubes.red * minCubes.green * minCubes.blue);
     }
     return sum;
 }
