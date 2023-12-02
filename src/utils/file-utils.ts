@@ -9,7 +9,7 @@ export class FileUtils {
                     return;
                 }
 
-                const rows = data.split('\n').map(line => line.trim());
+                const rows = data.trim().split('\n').map(line => line.trim());
                 resolve(rows);
             });
         });

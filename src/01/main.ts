@@ -1,4 +1,3 @@
-import * as fs from 'fs';
 import {FileUtils} from "../utils/file-utils";
 
 const testInputFilePath = 'testInput.txt';
@@ -31,6 +30,15 @@ async function main() {
     console.log(`Input solution second part: ${solveSecondPart(input)}`)
 }
 
+function solveFirstPart(input: string[]): number {
+    let sum = 0;
+    for (let row of input) {
+        const strNumber = findFirstNumber(row) + findFirstNumber(row.split('').reverse().join(''));
+        sum += Number(strNumber)
+    }
+    return sum;
+}
+
 function findFirstNumber(chars: string): string {
     const match = chars.match(/\d/);
     if (match) {
@@ -40,10 +48,11 @@ function findFirstNumber(chars: string): string {
     }
 }
 
-function solveFirstPart(input: string[]): number {
+function solveSecondPart(input: string[]): number {
     let sum = 0;
     for (let row of input) {
-        const strNumber = findFirstNumber(row) + findFirstNumber(row.split('').reverse().join(''));
+        const strNumber = findFirstNumberOrDescriptiveNumber(row, false) +
+            findFirstNumberOrDescriptiveNumber(row.split('').reverse().join(''), true);
         sum += Number(strNumber)
     }
     return sum;
@@ -63,15 +72,5 @@ function findFirstNumberOrDescriptiveNumber(chars: string, reverse: boolean): st
         }
     }
     return '';
-}
-
-function solveSecondPart(input: string[]): number {
-    let sum = 0;
-    for (let row of input) {
-        const strNumber = findFirstNumberOrDescriptiveNumber(row, false) +
-            findFirstNumberOrDescriptiveNumber(row.split('').reverse().join(''), true);
-        sum += Number(strNumber)
-    }
-    return sum;
 }
 
