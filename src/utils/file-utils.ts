@@ -1,7 +1,7 @@
 import fs from "fs";
 
 export class FileUtils {
-    public static readFileAtPath(filePath: string): Promise<string[]> {
+    public static readFileAtPath(filePath: string, separator = '\n'): Promise<string[]> {
         return new Promise((resolve, reject) => {
             fs.readFile(filePath, 'utf8', (err, data) => {
                 if (err) {
@@ -9,7 +9,7 @@ export class FileUtils {
                     return;
                 }
 
-                const rows = data.trim().split('\n').map(line => line.trim());
+                const rows = data.trim().split(separator).map(line => line.trim());
                 resolve(rows);
             });
         });
