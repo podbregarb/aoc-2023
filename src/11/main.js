@@ -18,26 +18,14 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const testInput = yield file_utils_1.FileUtils.readFileAtPath(testInputFilePath);
         const input = yield file_utils_1.FileUtils.readFileAtPath(inputFilePath);
-        console.log(`Test input solution first part: ${solveFirstPart(testInput)}`);
-        console.log(`Test input solution second part x 10: ${solveSecondPart(testInput, 10)}`);
-        console.log(`Test input solution second part x 100: ${solveSecondPart(testInput, 100)}`);
-        console.log(`Input solution first part: ${solveFirstPart(input)}`);
-        console.log(`Input solution second part: ${solveSecondPart(input, 1000000)}`);
+        console.log(`Test input solution first part: ${solve(testInput)}`);
+        console.log(`Test input solution second part x 10: ${solve(testInput, 10)}`);
+        console.log(`Test input solution second part x 100: ${solve(testInput, 100)}`);
+        console.log(`Input solution first part: ${solve(input)}`);
+        console.log(`Input solution second part: ${solve(input, 1000000)}`);
     });
 }
-function solveFirstPart(input) {
-    let sum = 0;
-    const doubleRows = getDoubleRows(input);
-    const doubleColumns = getDoubleColumns(input);
-    const galaxies = getGalaxies(input);
-    for (let i = 0; i < galaxies.length; i++) {
-        for (let j = i + 1; j < galaxies.length; j++) {
-            sum += getPathLength(galaxies[i], galaxies[j], doubleRows, doubleColumns, 2);
-        }
-    }
-    return sum;
-}
-function solveSecondPart(input, pathMultiplier) {
+function solve(input, pathMultiplier = 2) {
     let sum = 0;
     const doubleRows = getDoubleRows(input);
     const doubleColumns = getDoubleColumns(input);
